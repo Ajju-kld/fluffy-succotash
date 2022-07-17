@@ -1,3 +1,4 @@
+import 'package:animation_1/chart.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
@@ -10,7 +11,9 @@ class screen1 extends StatefulWidget {
 
 class _screen1State extends State<screen1> {
   final page = [
-    Container(
+    Container(height: double.infinity,
+    width: double.infinity,
+      child: Center(child: chart(),),
       decoration: BoxDecoration(
         gradient: LinearGradient(
             colors: [
