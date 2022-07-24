@@ -42,6 +42,7 @@ dependencies:
   fl_chart: ^0.55.0
   app_utils: ^0.0.4
   vector_math:
+  notion_api: ^1.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
