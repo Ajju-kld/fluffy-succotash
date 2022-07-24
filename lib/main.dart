@@ -1,4 +1,3 @@
-import 'package:animation_1/screen1.dart';
 import 'package:flutter/material.dart';
 
 
@@ -16,11 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         theme: ThemeData(primaryColor: Colors.purple),
         home: HomeScreen(),
-        routes: {
+        /*routes: {
           "screen1": (ctx) {
             return screen1();
-          },
           
-        },debugShowCheckedModeBanner: false,);
+          },
+        }*/debugShowCheckedModeBanner: false,);
   }
 }
