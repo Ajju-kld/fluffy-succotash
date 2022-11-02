@@ -1,0 +1,64 @@
+ Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: ()  {
+                           Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (ctx) {
+                            return build(context);
+                          }));
+                          setState(() {});
+                        },
+                        child: Container(
+                          child: Center(
+                              child: Text(
+                            " ",
+                            style: TextStyle(color: Colors.white, fontSize: 30),
+                          )),
+                          width: 350,
+                          height: 100,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.primaries[
+                                  Random().nextInt(Colors.primaries.length)]),
+                        ),
+                      ))
+
+
+
+                      ////
+
+
+
+                       Container(
+                          width: 200,
+                          height: 200,
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                    blurStyle: BlurStyle.outer,
+                                    offset: Offset.fromDirection(1.12),
+                                    color: Color.fromARGB(255, 38, 34, 34),
+                                    spreadRadius: 5),
+                                BoxShadow(
+                                    offset: Offset.fromDirection(1.12),
+                                    color: Color.fromARGB(255, 31, 28, 28),
+                                    blurRadius: 5,
+                                    spreadRadius: 8,
+                                    blurStyle: BlurStyle.solid),
+                                BoxShadow(
+                                  blurRadius: 5,
+                                  blurStyle: BlurStyle.outer,
+                                  spreadRadius: 10,
+                                  offset: Offset.fromDirection(1.12),
+                                  color: Color.fromARGB(255, 34, 29, 29),
+                                )
+                              ],
+                              color: Color.fromARGB(232, 27, 25, 25),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: QrImage(
+                            size: 1,
+                            data: qrdata,
+                            eyeStyle: eye_style(eye),
+                            dataModuleStyle:data_module_style(data_module),
+                          ),
+                        )

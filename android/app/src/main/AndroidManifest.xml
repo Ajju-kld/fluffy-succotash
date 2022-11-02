@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.animation_1">
    <application
-        android:label="animation_1"
+        android:label="Qr Genertor"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
