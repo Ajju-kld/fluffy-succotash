@@ -1,4 +1,4 @@
-# animation_1
+# Qrcode_generator
 
 A new Flutter project.
 
