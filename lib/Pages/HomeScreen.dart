@@ -5,7 +5,7 @@ import 'package:animation_1/Pages/Show_page.dart';
 import 'package:animation_1/model/Boxes.dart';
 
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+
 import 'package:hive_flutter/adapters.dart';
 
 import '../Widgets/frosted_appbar.dart';
@@ -29,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
 
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -42,10 +41,10 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
           width: 75.0,
           height: 75.0,
-          child: new RawMaterialButton(
-            fillColor: Color.fromARGB(255, 255, 5, 5),
-            focusColor: Color.fromARGB(255, 255, 18, 30),
-            shape: new CircleBorder(),
+          child:  RawMaterialButton(
+            fillColor:const Color.fromARGB(255, 255, 5, 5),
+            focusColor:const Color.fromARGB(255, 255, 18, 30),
+            shape: const CircleBorder(),
             elevation: 0.0,
             // ignore: prefer_const_constructors
             child: Icon(
@@ -61,14 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         clipBehavior: Clip.antiAlias,
-        shape: CircularNotchedRectangle(),
-        color: Color.fromARGB(254, 46, 45, 45),
+        shape:const CircularNotchedRectangle(),
+        color: const Color.fromARGB(254, 46, 45, 45),
         notchMargin: 8.0,
         child: Container(
           height: kBottomNavigationBarHeight,
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Container(
-            decoration: BoxDecoration(
+            decoration:const BoxDecoration(
                 color: Color.fromARGB(255, 19, 18, 18),
                 border: Border(
                     top: BorderSide(
@@ -82,18 +81,18 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: ((context, box, child) {
                 final items = box.values.toList().cast<qrcode_data>();
 
-                return build_the_widet(items);
+                return _buildWidget(items);
               }))
       
     );
   }
 
-  Widget build_the_widet(List<qrcode_data> items) {
+  Widget _buildWidget(List<qrcode_data> items) {
     if (items.isEmpty) {
-      return Scaffold(appBar: AppBar(backgroundColor: Colors.black38,title: Text('Homescreen',style: TextStyle(color: Colors.white),)),backgroundColor: Colors.black,
+      return Scaffold(appBar: AppBar(backgroundColor: Colors.black38,title:const Text('Homescreen',style: TextStyle(color: Colors.white),)),backgroundColor: Colors.black,
         body: Center(
             child: Container(
-                child: Text(
+                child: const Text(
           "Empty",
           style: TextStyle(fontSize: 30,color: Colors.white),
         ))),
@@ -101,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return CustomScrollView(slivers: [
-      frosted_appbar(url: 'Homescreen'),
+      const FrostedAppBar(url: 'Homescreen'),
        SliverList(
             delegate: SliverChildListDelegate(List.generate(
                 items.length,
@@ -111,22 +110,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       onTap: () async {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (ctx) {
-                          return home_screen(item: items[i],
+                          return DisplayPage(item: items[i],
                           );
                         }));
                       },
                       child: Container(
-                        child: Center(
-                            child: Text(
-                          items[i].name!,
-                          style: TextStyle(color: Colors.white, fontSize: 30),
-                        )),
                         width: 350,
                         height: 100,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: Colors.primaries[
                                 Random().nextInt(Colors.primaries.length)]),
+                        child: Center(
+                            child: Text(
+                          items[i].name!,
+                          style: const TextStyle(color: Colors.white, fontSize: 30),
+                        )),
                       ),
                     )))))
     ],) ;

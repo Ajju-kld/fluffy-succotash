@@ -35,13 +35,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.purple,
       ),
-      home: splash_screen(),
+      home: SplashScreen(),
       routes: {
         "genrating_page": (ctx) {
-          return genrating_page();
+          return GeneratingPage();
         },
         "generated_animation": (context) {
-          return qr_generated();
+          return QrGenerator();
         }
       },
       debugShowCheckedModeBanner: false,
@@ -49,21 +49,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class splash_screen extends StatefulWidget {
-  splash_screen({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+ const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<splash_screen> createState() => _splash_screenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splash_screenState extends State<splash_screen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    super.initState();
     Timer(
-        Duration(seconds: 2),
+        const Duration(seconds: 1,milliseconds: 500),
         () => Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomeScreen())));
+    super.initState();
   }
 
   @override

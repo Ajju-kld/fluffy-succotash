@@ -1,10 +1,8 @@
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:animation_1/model/Qrcode_data.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
@@ -12,21 +10,20 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
-class home_screen extends StatefulWidget {
-  home_screen({Key? key, required this.item}) : super(key: key);
+class DisplayPage extends StatefulWidget {
+  const DisplayPage({Key? key, required this.item}) : super(key: key);
   final qrcode_data item;
 
   @override
-  State<home_screen> createState() => _home_screenState();
+  State<DisplayPage> createState() => _DisplayPageState();
 }
 
-class _home_screenState extends State<home_screen> {
+class _DisplayPageState extends State<DisplayPage> {
   var file;
 
   @override
   void dispose() async {
-    // TODO: implement dispose
-    Delete_the_file();
+    _deleteTheFile();
     super.dispose();
   }
 
@@ -35,10 +32,10 @@ class _home_screenState extends State<home_screen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Qr Code'),
-        backgroundColor: Color.fromARGB(255, 25, 21, 21),
+        title: const Text('Qr Code'),
+        backgroundColor: const Color.fromARGB(255, 25, 21, 21),
       ),
-      backgroundColor: Color.fromARGB(255, 25, 21, 21),
+      backgroundColor: const Color.fromARGB(255, 25, 21, 21),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -67,7 +64,7 @@ class _home_screenState extends State<home_screen> {
                               widget.item.name!,
                               overflow: TextOverflow.fade,
                               softWrap: true,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 35,
                                   fontWeight: FontWeight.w500),
@@ -80,7 +77,8 @@ class _home_screenState extends State<home_screen> {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 28, 22, 22),
+                                      color:
+                                          const Color.fromARGB(255, 28, 22, 22),
                                       borderRadius: BorderRadius.circular(11)),
                                   height: 50,
                                   width: 240,
@@ -91,7 +89,7 @@ class _home_screenState extends State<home_screen> {
                                       scrollDirection: Axis.horizontal,
                                       child: Text(widget.item.url!,
                                           maxLines: 1,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontFamily: 'Montserrat',
                                               fontWeight: FontWeight.w700,
                                               color: Color.fromARGB(
@@ -105,13 +103,13 @@ class _home_screenState extends State<home_screen> {
                                     splashColor: Colors.black,
                                     splashRadius: 0.2,
                                     onPressed: () {
-                                      Clipboard.setData(
-                                          ClipboardData(text: widget.item.url));
+                                      Clipboard.setData(ClipboardData(
+                                          text: widget.item.url!));
                                       Fluttertoast.showToast(
                                           msg: "copied",
                                           toastLength: Toast.LENGTH_SHORT);
                                     },
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.copy_outlined,
                                       color: Colors.white,
                                     ))
@@ -144,24 +142,23 @@ class _home_screenState extends State<home_screen> {
                       final controller = ScreenshotController();
                       Uint8List bytes =
                           await controller.captureFromWidget(buildcard());
-                      final storage_place =
-                          await getApplicationDocumentsDirectory();
+                      final path = await getApplicationDocumentsDirectory();
 
-                      file = File('${storage_place.path}/image.png');
+                      file = File('${path.path}/image.png');
 
                       file.writeAsBytes(bytes);
-                      Share.shareFiles(['${storage_place.path}/image.png']);
+                      Share.shareFiles(['${path.path}/image.png']);
                     }),
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.share_outlined,
                       color: Colors.white,
                     )),
                 IconButton(
                     iconSize: 40,
                     onPressed: (() async {
-                      Delete();
+                      _deleteFile();
                     }),
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.delete,
                       color: Colors.white,
                     ))
@@ -174,7 +171,7 @@ class _home_screenState extends State<home_screen> {
   }
 
   // this are the functions for style of qrcode
-  QrEyeStyle eye_style(bool b) {
+  QrEyeStyle _eyeStyle(bool b) {
     if (b == true) {
       return QrEyeStyle(
           eyeShape: QrEyeShape.circle,
@@ -185,7 +182,7 @@ class _home_screenState extends State<home_screen> {
         color: Colors.primaries[Random().nextInt(Colors.primaries.length)]);
   }
 
-  QrDataModuleStyle data_module_style(bool b) {
+  QrDataModuleStyle _dataModuleStyle(bool b) {
     if (b == true) {
       return QrDataModuleStyle(
           dataModuleShape: QrDataModuleShape.circle,
@@ -207,11 +204,11 @@ class _home_screenState extends State<home_screen> {
             BoxShadow(
                 blurStyle: BlurStyle.outer,
                 offset: Offset.fromDirection(1.12),
-                color: Color.fromARGB(255, 38, 34, 34),
+                color: const Color.fromARGB(255, 38, 34, 34),
                 spreadRadius: 5),
             BoxShadow(
                 offset: Offset.fromDirection(1.12),
-                color: Color.fromARGB(255, 31, 28, 28),
+                color: const Color.fromARGB(255, 31, 28, 28),
                 blurRadius: 5,
                 spreadRadius: 8,
                 blurStyle: BlurStyle.solid),
@@ -220,39 +217,46 @@ class _home_screenState extends State<home_screen> {
               blurStyle: BlurStyle.outer,
               spreadRadius: 10,
               offset: Offset.fromDirection(1.12),
-              color: Color.fromARGB(255, 34, 29, 29),
+              color: const Color.fromARGB(255, 34, 29, 29),
             )
           ],
-          color: Color.fromARGB(232, 27, 25, 25),
+          color: const Color.fromARGB(232, 27, 25, 25),
           borderRadius: BorderRadius.circular(20)),
       child: QrImage(
         size: 1,
         data: widget.item.url!,
-        eyeStyle: eye_style(widget.item.eye_style!),
-        dataModuleStyle: data_module_style(widget.item.style!),
+        eyeStyle: _eyeStyle(widget.item.eye_style!),
+        dataModuleStyle: _dataModuleStyle(widget.item.style!),
       ),
     );
   }
 
-  void Delete_the_file() async {
+  void _deleteTheFile() async {
     await file.delete();
   }
 
-  void Delete() {
+  void _deleteFile() {
     showDialog(
         context: context,
         builder: ((context) {
           return Center(
             child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: AlertDialog(shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),backgroundColor: Color.fromARGB(255, 43, 42, 42),contentPadding: EdgeInsets.all(20),
+                child: AlertDialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  backgroundColor: const Color.fromARGB(255, 43, 42, 42),
+                  contentPadding: const EdgeInsets.all(20),
                   content: SingleChildScrollView(
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 30, 10),
-                        child: Text("Do you want to delete this link ?",style: TextStyle(color: Colors.white,fontSize: 19),),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 30, 10),
+                        child: Text(
+                          "Do you want to delete this link ?",
+                          style: TextStyle(color: Colors.white, fontSize: 19),
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -262,14 +266,20 @@ class _home_screenState extends State<home_screen> {
                                 widget.item.delete();
                                 Navigator.pop(context);
                                 Navigator.pop(context);
-                                Delete_the_file();
+                                _deleteTheFile();
                               },
-                              child: Text("Yes",style: TextStyle(fontSize: 18),)),
+                              child: const Text(
+                                "Yes",
+                                style: TextStyle(fontSize: 18),
+                              )),
                           TextButton(
                               onPressed: (() {
                                 Navigator.pop(context);
                               }),
-                              child: Text("No",style:TextStyle(fontSize: 18),))
+                              child: const Text(
+                                "No",
+                                style: TextStyle(fontSize: 18),
+                              ))
                         ],
                       )
                     ],

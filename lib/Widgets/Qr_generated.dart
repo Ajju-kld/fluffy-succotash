@@ -1,30 +1,28 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
+
 import 'package:lottie/lottie.dart';
 
-import '../Pages/HomeScreen.dart';
 import 'Doned.dart';
 
-class qr_generated extends StatefulWidget {
-  const qr_generated({super.key});
+class QrGenerator extends StatefulWidget {
+  const QrGenerator({super.key});
 
   @override
-  State<qr_generated> createState() => _qr_generatedState();
+  State<QrGenerator> createState() => _QrGeneratorState();
 }
 
-class _qr_generatedState extends State<qr_generated> {
+class _QrGeneratorState extends State<QrGenerator> {
   @override
   void initState() {
-    // TODO: implement initState
+ 
     super.initState();
        Timer(
-        Duration(seconds: 1),
+       const Duration(seconds: 1),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => doned())));
+            context, MaterialPageRoute(builder: (context) => const Doned())));
   }
   @override
   Widget build(BuildContext context) {

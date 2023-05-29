@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class frosted_appbar extends StatelessWidget {
-  final url;
-  const frosted_appbar({Key? key,required this.url}) : super(key: key);
+class FrostedAppBar extends StatelessWidget {
+  final String url;
+  const FrostedAppBar({Key? key,required this.url}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +16,10 @@ class frosted_appbar extends StatelessWidget {
       snap: false,
       flexibleSpace: ClipRect(
           child: BackdropFilter(
-              child: FlexibleSpaceBar(titlePadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: FlexibleSpaceBar(titlePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(url),
-              ),
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10))),
+              ))),
     );
   }
 }

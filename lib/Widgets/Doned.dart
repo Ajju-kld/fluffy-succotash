@@ -1,23 +1,25 @@
 import 'dart:async';
 
-import 'package:animation_1/Pages/HomeScreen.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
 
-class doned extends StatefulWidget {
-  const doned({super.key});
+class Doned extends StatefulWidget {
+  const Doned({super.key});
 
   @override
-  State<doned> createState() => _donedState();
+  State<Doned> createState() => _DonedState();
 }
 
-class _donedState extends State<doned> {
+class _DonedState extends State<Doned> {
+
+  @override
    void initState() {
-    // TODO: implement initState
+
     super.initState();
     Timer(
-        Duration(seconds: 1),
+       const Duration(seconds: 1),
         () => Navigator.of(context).pop());
   }
   @override
