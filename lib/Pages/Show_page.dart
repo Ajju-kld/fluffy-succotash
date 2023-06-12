@@ -19,7 +19,9 @@ class DisplayPage extends StatefulWidget {
 }
 
 class _DisplayPageState extends State<DisplayPage> {
-  var file;
+  late File file;
+  late dynamic path;
+  
 
   @override
   void dispose() async {
@@ -27,8 +29,19 @@ class _DisplayPageState extends State<DisplayPage> {
     super.dispose();
   }
 
+  void _storeTheFile() async {
+    final controller = ScreenshotController();
+    Uint8List bytes = await controller.captureFromWidget(buildcard());
+    path = await getApplicationDocumentsDirectory();
+
+    file = File('${path.path}/image.png');
+
+    file.writeAsBytes(bytes);
+  }
+
   @override
   Widget build(BuildContext context) {
+    _storeTheFile();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -139,14 +152,6 @@ class _DisplayPageState extends State<DisplayPage> {
                 IconButton(
                     iconSize: 40,
                     onPressed: (() async {
-                      final controller = ScreenshotController();
-                      Uint8List bytes =
-                          await controller.captureFromWidget(buildcard());
-                      final path = await getApplicationDocumentsDirectory();
-
-                      file = File('${path.path}/image.png');
-
-                      file.writeAsBytes(bytes);
                       Share.shareFiles(['${path.path}/image.png']);
                     }),
                     icon: const Icon(
